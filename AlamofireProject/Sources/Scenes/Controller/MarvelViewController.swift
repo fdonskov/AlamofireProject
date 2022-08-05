@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MarvelViewController: UIViewController {
     
     private var myTableView = UITableView()
     private var array = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - UITableViewDelegate
-extension ViewController: UITableViewDelegate {
+extension MarvelViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
@@ -44,7 +44,7 @@ extension ViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource
-extension ViewController: UITableViewDataSource {
+extension MarvelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MarvelCharacterModel {
+struct MarvelCharacterModel: Decodable {
     let code: Int
     let status: String
     let copyright: String
@@ -17,7 +17,7 @@ struct MarvelCharacterModel {
     let data: DescriptionData
 }
 
-struct DescriptionData {
+struct DescriptionData: Decodable {
     let offset: Int
     let limit: Int
     let total: Int
@@ -25,7 +25,7 @@ struct DescriptionData {
     let results: [MarvelResults]
 }
 
-struct MarvelResults {
+struct MarvelResults: Decodable {
     let id: Int
     let name: String
     let description: String
@@ -39,7 +39,7 @@ struct MarvelResults {
     let urls: [URLItem]
 }
 
-struct MarvelCharacter {
+struct MarvelCharacter: Decodable {
     let path: String
     let ext: String
     
@@ -49,14 +49,14 @@ struct MarvelCharacter {
     }
 }
 
-struct ComicsDescription {
+struct ComicsDescription: Decodable {
     let available: Int
     let collectionURI: String
     let items: [Items]
     let returned: Int
 }
 
-struct Items {
+struct Items: Decodable {
     let resourceURI: String
     let name: String
     let type: String?
