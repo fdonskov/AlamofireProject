@@ -12,6 +12,7 @@
 		0603D4BE289BD79200831EA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0603D4BD289BD79200831EA8 /* Assets.xcassets */; };
 		0603D4C1289BD79200831EA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0603D4BF289BD79200831EA8 /* LaunchScreen.storyboard */; };
 		0603D4D5289CDD7100831EA8 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603D4D4289CDD7100831EA8 /* CustomTableViewCell.swift */; };
+		0603D4D7289D211200831EA8 /* MarvelCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603D4D6289D211200831EA8 /* MarvelCharacterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		0603D4C0289BD79200831EA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0603D4C2289BD79200831EA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0603D4D4289CDD7100831EA8 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		0603D4D6289D211200831EA8 /* MarvelCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacterModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		0603D4CE289BDE1400831EA8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0603D4D6289D211200831EA8 /* MarvelCharacterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0603D4B9289BD79000831EA8 /* ViewController.swift in Sources */,
+				0603D4D7289D211200831EA8 /* MarvelCharacterModel.swift in Sources */,
 				0603D4D5289CDD7100831EA8 /* CustomTableViewCell.swift in Sources */,
 				0603D4B5289BD79000831EA8 /* AppDelegate.swift in Sources */,
 			);
