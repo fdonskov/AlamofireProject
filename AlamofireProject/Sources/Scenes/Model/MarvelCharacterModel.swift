@@ -28,7 +28,7 @@ struct DescriptionData: Decodable {
 struct MarvelResults: Decodable {
     let id: Int
     let name: String
-    let description: String
+    let description: String?
     let modified: String
     let thumbnail: MarvelCharacter
     let resourceURI: String
