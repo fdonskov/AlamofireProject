@@ -44,7 +44,6 @@ class CustomTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupHierarchy()
-        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -56,6 +55,8 @@ class CustomTableViewCell: UITableViewCell {
         addSubview(cellLabelStack)
         cellLabelStack.addArrangedSubview(characterNameLabel)
         cellLabelStack.addArrangedSubview(descriptionLabel)
+        
+        setupLayout()
     }
     
     private func setupLayout() {

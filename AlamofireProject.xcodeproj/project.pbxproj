@@ -15,6 +15,7 @@
 		0603D4D7289D211200831EA8 /* MarvelCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603D4D6289D211200831EA8 /* MarvelCharacterModel.swift */; };
 		0603D4DB289D27E100831EA8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603D4DA289D27E100831EA8 /* NetworkManager.swift */; };
 		0603D502289F9AA700831EA8 /* CharactersDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603D501289F9AA700831EA8 /* CharactersDisplayView.swift */; };
+		0603D506289FA66500831EA8 /* CharactersDisplayConfiguratedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603D505289FA66500831EA8 /* CharactersDisplayConfiguratedView.swift */; };
 		0F1A4144FBE452DB4BA9F1AA /* Pods_AlamofireProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565974BD77D5DD0F78D1F56E /* Pods_AlamofireProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		0603D4D6289D211200831EA8 /* MarvelCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacterModel.swift; sourceTree = "<group>"; };
 		0603D4DA289D27E100831EA8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0603D501289F9AA700831EA8 /* CharactersDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDisplayView.swift; sourceTree = "<group>"; };
+		0603D505289FA66500831EA8 /* CharactersDisplayConfiguratedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDisplayConfiguratedView.swift; sourceTree = "<group>"; };
 		565974BD77D5DD0F78D1F56E /* Pods_AlamofireProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlamofireProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB15DE8D190895F67958F3BC /* Pods-AlamofireProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlamofireProject.release.xcconfig"; path = "Target Support Files/Pods-AlamofireProject/Pods-AlamofireProject.release.xcconfig"; sourceTree = "<group>"; };
 		E4B5927965BFADF35A63D136 /* Pods-AlamofireProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlamofireProject.debug.xcconfig"; path = "Target Support Files/Pods-AlamofireProject/Pods-AlamofireProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				0603D501289F9AA700831EA8 /* CharactersDisplayView.swift */,
+				0603D505289FA66500831EA8 /* CharactersDisplayConfiguratedView.swift */,
 				0603D4CF289BDE1D00831EA8 /* Cells */,
 			);
 			path = View;
@@ -280,6 +283,7 @@
 				0603D4D7289D211200831EA8 /* MarvelCharacterModel.swift in Sources */,
 				0603D4DB289D27E100831EA8 /* NetworkManager.swift in Sources */,
 				0603D4D5289CDD7100831EA8 /* CustomTableViewCell.swift in Sources */,
+				0603D506289FA66500831EA8 /* CharactersDisplayConfiguratedView.swift in Sources */,
 				0603D4B5289BD79000831EA8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
