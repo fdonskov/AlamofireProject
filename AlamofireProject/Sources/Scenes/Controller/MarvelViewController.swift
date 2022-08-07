@@ -9,58 +9,84 @@ import UIKit
 
 class MarvelViewController: UIViewController {
     
-    private var myTableView = UITableView()
-    private var array = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    let networkManager = NetworkManager()
+    var characterResults: [MarvelResults] = []
+    var selectedItem: MarvelResults?
+    
+    private var marvelCharacterView: CharactersDisplayView? {
+        guard isViewLoaded else { return nil }
+        return view as? CharactersDisplayView
+    }
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        view = CharactersDisplayView()
+        title = "Marvel Characters"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
-        createTableView()
-    }
-    
-    func createTableView() {
-        myTableView = UITableView(frame: view.bounds, style: .plain)
-        myTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
+        marvelCharacterView?.activityIndicator.startAnimating()
         
-        myTableView.delegate = self
-        myTableView.dataSource = self
+        marvelCharacterView?.tableView.dataSource = self
+        marvelCharacterView?.tableView.delegate = self
         
-        myTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        view.addSubview(myTableView)
-    }
-}
-
-// MARK: - UITableViewDelegate
-extension MarvelViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        networkManager.delegate = self
+        networkManager.networkRequest()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension MarvelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array.count
+        return self.characterResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        let number = array[indexPath.row]
-        
-        cell.textLabel?.text = number
-        
+        DispatchQueue.main.async {
+            cell.configureModel(with: self.characterResults[indexPath.row])
+            tableView.beginUpdates()
+            cell.layoutIfNeeded()
+            tableView.setNeedsLayout()
+            tableView.endUpdates()
+        }
         return cell
     }
+}
+
+// MARK: - UITableViewDelegate
+extension MarvelViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Comics"
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedItem = characterResults[indexPath.row]
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let configurationController = MarvelConfigurationViewController()
+        configurationController.data = selectedItem
+        present(configurationController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let lastVisiblePath = tableView.indexPathsForVisibleRows?.last {
+            if indexPath == lastVisiblePath {
+                self.marvelCharacterView?.activityIndicator.stopAnimating()
+            }
+        }
+    }
+}
+
+// MARK: -
+extension MarvelViewController: NetworkManagerDelegate {
+    func updateUI(for model: [MarvelResults]) {
+        self.characterResults = model
+        marvelCharacterView?.reloadTableView()
     }
 }
 

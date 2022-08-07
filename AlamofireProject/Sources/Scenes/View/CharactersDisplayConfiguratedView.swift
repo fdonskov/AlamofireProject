@@ -59,12 +59,13 @@ class CharactersDisplayConfiguratedView: UIView {
     // MARK: - Private Methods
     private func setupHierarchy() {
         addSubview(characterStackView)
-        characterStackView.addArrangedSubview(characterNameLabel)
         characterStackView.addArrangedSubview(characterImageView)
+        characterStackView.addArrangedSubview(characterNameLabel)
         characterImageView.addSubview(imageActivityIndicator)
         addSubview(tableView)
         
         setupLayout()
+        setupView()
     }
     
     private func setupLayout() {
@@ -83,18 +84,19 @@ class CharactersDisplayConfiguratedView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .lightGray
+        backgroundColor = .systemBackground
     }
     
     // MARK: - Configuration Methods
     func configureView(with model: MarvelResults) {
         self.imageActivityIndicator.startAnimating()
-        
-        DispatchQueue.main.async {
+
+        DispatchQueue.global(qos: .userInteractive).async {
             guard let imageUrl = URL(string: model.thumbnail.path + "." + model.thumbnail.ext), let imageData = try? Data(contentsOf: imageUrl) else { return }
-            self.characterNameLabel.text = model.name
-            self.characterImageView.image = UIImage(data: imageData)
-            self.imageActivityIndicator.stopAnimating()
+            DispatchQueue.main.async {
+                self.characterImageView.image = UIImage(data: imageData)
+                self.imageActivityIndicator.stopAnimating()
+            }
         }
     }
 }

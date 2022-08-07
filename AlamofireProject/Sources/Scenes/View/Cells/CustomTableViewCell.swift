@@ -70,7 +70,7 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Configuration Methods
     func configureModel(with model: MarvelResults) {
-        characterNameLabel.text = description.description
+        characterNameLabel.text = model.name
         
         if let description = model.description, description != "" {
             descriptionLabel.text = description

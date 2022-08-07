@@ -60,7 +60,7 @@ class CharactersDisplayView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .lightGray
+        backgroundColor = .white
     }
     
     func reloadTableView() {
