@@ -20,6 +20,7 @@ class NetworkManager {
     func networkRequest() {
         let url = "https://gateway.marvel.com/v1/public/characters"
         let parameters: [String: String] = ["ts": "1", "apikey": "4c7c0f61e37a25cc26778a4e11fdd4e5", "hash": "a6dab223fd7a5fc6570be234e8172df5"]
+        
         AF.request(url, parameters: parameters)
             .validate()
             .responseDecodable(of: MarvelCharacterModel.self) { (data) in

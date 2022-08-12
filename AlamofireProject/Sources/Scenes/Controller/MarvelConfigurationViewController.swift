@@ -39,15 +39,12 @@ class MarvelConfigurationViewController: UIViewController {
     func configureView(with model: MarvelResults) {
         marvelConfigurationView?.imageActivityIndicator.startAnimating()
 
-        let imageResult = "https://img2.goodfon.ru/original/800x600/d/3f/maserati-granturismo-black-7217.jpg"
-
         DispatchQueue.global(qos: .userInteractive).async {
-
             guard let imageUrl = URL(string: model.thumbnail.path + "." + model.thumbnail.ext) else { return }
 
             DispatchQueue.main.async {
 
-                AF.download(imageResult).responseData { (response) in
+                AF.download(imageUrl).responseData { (response) in
                     if let data = response.value {
                         let imageData = UIImage(data: data)
 
