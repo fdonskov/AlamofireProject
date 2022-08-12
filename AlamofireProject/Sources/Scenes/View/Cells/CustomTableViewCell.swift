@@ -56,6 +56,8 @@ class CustomTableViewCell: UITableViewCell {
         cellLabelStack.addArrangedSubview(characterNameLabel)
         cellLabelStack.addArrangedSubview(descriptionLabel)
         
+        isUserInteractionEnabled = false
+        
         setupLayout()
     }
     
@@ -72,10 +74,15 @@ class CustomTableViewCell: UITableViewCell {
     func configureModel(with model: MarvelResults) {
         characterNameLabel.text = model.name
         
-        if let description = model.description, description != "" {
-            descriptionLabel.text = description
-        } else {
-            descriptionLabel.isHidden = true
-        }
+//        if let description = model.description, description != "" {
+//            descriptionLabel.text = description
+//        }
+        self.isUserInteractionEnabled = true
      }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        characterNameLabel.text = nil
+        descriptionLabel.text = nil
+    }
 }

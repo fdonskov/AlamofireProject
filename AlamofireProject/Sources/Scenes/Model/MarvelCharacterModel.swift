@@ -52,25 +52,17 @@ struct MarvelCharacter: Decodable {
 struct ComicsDescription: Decodable {
     let available: Int
     let collectionURI: String
-    let items: [Items]
+    let items: [Item]
     let returned: Int
 }
 
-struct Items: Decodable {
+struct Item: Decodable {
     let resourceURI: String
     let name: String
     let type: String?
-    
-    var expandOption: String {
-        type ?? "nil"
-    }
 }
 
 struct URLItem: Decodable {
     let type: String
     let url: String
-}
-
-struct PrintableCharacter {
-    let name: String
 }

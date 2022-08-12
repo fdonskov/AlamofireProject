@@ -64,6 +64,6 @@ class CharactersDisplayView: UIView {
     }
     
     func reloadTableView() {
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 }

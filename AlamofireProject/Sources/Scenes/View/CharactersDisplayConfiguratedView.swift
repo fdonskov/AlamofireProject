@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class CharactersDisplayConfiguratedView: UIView {
     
@@ -60,7 +61,6 @@ class CharactersDisplayConfiguratedView: UIView {
     private func setupHierarchy() {
         addSubview(characterStackView)
         characterStackView.addArrangedSubview(characterImageView)
-        characterStackView.addArrangedSubview(characterNameLabel)
         characterImageView.addSubview(imageActivityIndicator)
         addSubview(tableView)
         
@@ -74,10 +74,12 @@ class CharactersDisplayConfiguratedView: UIView {
             characterStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             characterStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             characterStackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.6),
+            
             tableView.topAnchor.constraint(equalTo: characterStackView.bottomAnchor, constant: 8),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: characterStackView.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: characterStackView.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
             imageActivityIndicator.centerXAnchor.constraint(equalTo: characterImageView.centerXAnchor),
             imageActivityIndicator.centerYAnchor.constraint(equalTo: characterImageView.centerYAnchor)
         ])
@@ -85,18 +87,6 @@ class CharactersDisplayConfiguratedView: UIView {
     
     private func setupView() {
         backgroundColor = .systemBackground
-    }
-    
-    // MARK: - Configuration Methods
-    func configureView(with model: MarvelResults) {
-        self.imageActivityIndicator.startAnimating()
-
-        DispatchQueue.global(qos: .userInteractive).async {
-            guard let imageUrl = URL(string: model.thumbnail.path + "." + model.thumbnail.ext), let imageData = try? Data(contentsOf: imageUrl) else { return }
-            DispatchQueue.main.async {
-                self.characterImageView.image = UIImage(data: imageData)
-                self.imageActivityIndicator.stopAnimating()
-            }
-        }
+//        tableView.tableHeaderView = characterNameLabel
     }
 }

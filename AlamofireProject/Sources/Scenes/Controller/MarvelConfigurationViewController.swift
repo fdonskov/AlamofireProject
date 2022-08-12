@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MarvelConfigurationViewController: UIViewController {
     
@@ -21,21 +22,42 @@ class MarvelConfigurationViewController: UIViewController {
     // MARK: - ViewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
         guard let data = data else { return }
-        self.marvelConfigurationView?.configureView(with: data)
+        
+        configureView(with: data)
     }
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view = CharactersDisplayConfiguratedView()
+        
         marvelConfigurationView?.tableView.dataSource = self
     }
-}
+    
+    // MARK: - Configuration Methods
+    
+    func configureView(with model: MarvelResults) {
+        marvelConfigurationView?.imageActivityIndicator.startAnimating()
 
-// MARK: - NetworkManagerDelegate
-extension MarvelConfigurationViewController: NetworkManagerDelegate {
-    func updateUI(for model: [MarvelResults]) {
-        marvelConfigurationView?.configureView(with: model[0])
+        let imageResult = "https://img2.goodfon.ru/original/800x600/d/3f/maserati-granturismo-black-7217.jpg"
+
+        DispatchQueue.global(qos: .userInteractive).async {
+
+            guard let imageUrl = URL(string: model.thumbnail.path + "." + model.thumbnail.ext) else { return }
+
+            DispatchQueue.main.async {
+
+                AF.download(imageResult).responseData { (response) in
+                    if let data = response.value {
+                        let imageData = UIImage(data: data)
+
+                        self.marvelConfigurationView?.characterImageView.image = imageData
+                        self.marvelConfigurationView?.imageActivityIndicator.stopAnimating()
+                        self.marvelConfigurationView?.imageActivityIndicator.isHidden = true
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -47,7 +69,13 @@ extension MarvelConfigurationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data?.comics.items[indexPath.row].name
+        
+        if let comics = data?.comics.items {
+            cell.textLabel?.text = comics[indexPath.row].name
+        } else {
+            cell.textLabel?.text = "No Data Found"
+        }
+        
         return cell
     }
     

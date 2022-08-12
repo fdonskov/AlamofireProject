@@ -11,14 +11,13 @@ class MarvelViewController: UIViewController {
     
     let networkManager = NetworkManager()
     var characterResults: [MarvelResults] = []
-    var selectedItem: MarvelResults?
     
     private var marvelCharacterView: CharactersDisplayView? {
         guard isViewLoaded else { return nil }
         return view as? CharactersDisplayView
     }
 
-    // MARK: - viewDidLoad
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view = CharactersDisplayView()
@@ -38,19 +37,12 @@ class MarvelViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension MarvelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.characterResults.count
+        return characterResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
-        
-        DispatchQueue.main.async {
-            cell.configureModel(with: self.characterResults[indexPath.row])
-            tableView.beginUpdates()
-            cell.layoutIfNeeded()
-            tableView.setNeedsLayout()
-            tableView.endUpdates()
-        }
+        cell.configureModel(with: self.characterResults[indexPath.row])
         return cell
     }
 }
@@ -62,14 +54,13 @@ extension MarvelViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        selectedItem = characterResults[indexPath.row]
         return indexPath
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let configurationController = MarvelConfigurationViewController()
-        configurationController.data = selectedItem
+        configurationController.data = characterResults[indexPath.row]
         present(configurationController, animated: true)
     }
     
@@ -82,11 +73,14 @@ extension MarvelViewController: UITableViewDelegate {
     }
 }
 
-// MARK: -
+// MARK: - NetworkManagerDelegate
 extension MarvelViewController: NetworkManagerDelegate {
     func updateUI(for model: [MarvelResults]) {
         self.characterResults = model
-        marvelCharacterView?.reloadTableView()
+        
+        DispatchQueue.main.async {
+            self.marvelCharacterView?.reloadTableView()
+        }   
     }
 }
 
